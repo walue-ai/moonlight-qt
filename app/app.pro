@@ -1,6 +1,24 @@
 QT += core quick network quickcontrols2 svg
 CONFIG += c++11
 
+# CapnReactive integration support
+contains(CONFIG, capnreactive) {
+    DEFINES += CAPNREACTIVE_ENABLED
+    
+    INCLUDEPATH += $$PWD/streaming
+    
+    !isEmpty(CAPNREACTIVE_LIB_PATH) {
+        LIBS += -L$$CAPNREACTIVE_LIB_PATH -lsunshine_capnreactive_ffi
+    }
+    
+    SOURCES += \
+        streaming/capnreactive_client.cpp
+        
+    HEADERS += \
+        streaming/capnreactive_client.h \
+        streaming/sunshine_capnreactive.h
+}
+
 unix:!macx {
     TARGET = moonlight
 } else {
