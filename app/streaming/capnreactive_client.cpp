@@ -1,13 +1,12 @@
+#ifdef CAPNREACTIVE_ENABLED
+
 #include "capnreactive_client.h"
+#include "sunshine_capnreactive.h"
 #include <QDebug>
 #include <QNetworkRequest>
 #include <QUrl>
 #include <QJsonDocument>
 #include <QJsonObject>
-
-extern "C" {
-    #include "sunshine_capnreactive.h"
-}
 
 CapnReactiveClient::CapnReactiveClient(QObject *parent) 
     : QObject(parent), 
@@ -282,3 +281,5 @@ QString CapnReactiveClient::errorCodeToString(CSunshineErrorCode code) {
         default: return QString("Unknown Error Code: %1").arg(static_cast<int>(code));
     }
 }
+
+#endif // CAPNREACTIVE_ENABLED

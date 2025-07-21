@@ -2,13 +2,15 @@ QT += core quick network quickcontrols2 svg
 CONFIG += c++11
 
 # CapnReactive integration support
-contains(CONFIG, capnreactive) {
+capnreactive {
     DEFINES += CAPNREACTIVE_ENABLED
     
     INCLUDEPATH += $$PWD/streaming
     
     !isEmpty(CAPNREACTIVE_LIB_PATH) {
         LIBS += -L$$CAPNREACTIVE_LIB_PATH -lsunshine_capnreactive_ffi
+    } else {
+        LIBS += -L$$PWD/../capnreactive/sunshine-integration/target/release -lsunshine_capnreactive_ffi
     }
     
     SOURCES += \
